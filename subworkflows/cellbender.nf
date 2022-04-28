@@ -61,3 +61,4 @@ workflow cellbender_deconvolution {
         channel__file_paths_10x 
         ch_experiment_bam_bai_barcodes
         ch_experiment_filth5
+}
