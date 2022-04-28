@@ -21,12 +21,11 @@ workflow cellbender {
 
 workflow cellbender_deconvolution {
     take:
-        params.input,
+        input
         prepare_inputs
-
     main:
            // // Removing the background using cellbender which is then used in the deconvolution.
-        if (params.input == 'cellbender'){
+        if (input == 'cellbender'){
             log.info ' ---- using cellbender to remove background---'
             cellbender(prepare_inputs.out.ch_experimentid_paths10x_raw,
                 prepare_inputs.out.ch_experimentid_paths10x_filtered,
@@ -38,7 +37,7 @@ workflow cellbender_deconvolution {
             ch_experiment_bam_bai_barcodes= DECONV_INPUTS.out.ch_experiment_bam_bai_barcodes
             ch_experiment_filth5= DECONV_INPUTS.out.ch_experiment_filth5
 
-        }else if (params.input == 'existing_cellbender'){
+        }else if (input == 'existing_cellbender'){
             // Here we are using the existing cellbender from a different run, Nothe that the structure of the cellbender folder should be same as produced by this pipeline.
             log.info ' ---- using existing cellbender output for deconvolution---'
             capture_cellbender_files(params.cellbender_location,"${params.output_dir}/nf-preprocessing")
@@ -48,7 +47,7 @@ workflow cellbender_deconvolution {
             ch_experiment_bam_bai_barcodes= DECONV_INPUTS.out.ch_experiment_bam_bai_barcodes
             ch_experiment_filth5= DECONV_INPUTS.out.ch_experiment_filth5
         }
-        else if (params.input == 'cellranger'){
+        else if (input == 'cellranger'){
             // This is where we skip the cellbender and use the cellranger filtered datasets.
             log.info '--- using cellranger filtered data instead of cellbender (skipping cellbender)---'
             ch_experiment_bam_bai_barcodes=prepare_inputs.out.ch_experiment_bam_bai_barcodes
