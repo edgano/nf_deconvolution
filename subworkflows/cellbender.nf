@@ -1,7 +1,7 @@
 
 // Load base.config by default for all pipelines - typically included in the nextflow config.
 include { CELLBENDER } from "${projectDir}/modules/nf-core/modules/cellbender/main"
-include { DECONV_INPUTS } from "${projectDir}/modules/nf-core/modules/cellbender/main"
+include { DECONV_INPUTS } from "${projectDir}/subworkflows/prepare_inputs/deconvolution_inputs"
 
 workflow cellbender {
     take:
