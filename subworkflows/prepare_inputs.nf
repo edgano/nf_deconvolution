@@ -1,5 +1,5 @@
 nextflow.enable.dsl=2
-include { from_barcodes } from "${projectDir}/prepare_inputs/from_barcodes.nf"
+include { from_barcodes } from "${projectDir}/subworkflows/prepare_inputs/from_barcodes.nf"
 
 workflow prepare_inputs {
 	// this workflow processes the outputs from cellbender to perform the data preparation
